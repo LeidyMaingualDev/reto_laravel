@@ -3,10 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
+
 
 
 // Página de inicio
@@ -43,14 +44,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/student/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
 
     // Dashboard profesor
-    Route::get('/teacher/dashboard', function () {
-        return 'Bienvenido al dashboard del profesor';
-    })->name('teacher.dashboard');
+    Route::get('/teacher/dashboard', [TeacherController::class, 'dashboard'])->name('teacher.dashboard');
 
-    // Dashboard administrador (si lo usas)
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
 //inscrpcion 
 Route::post('/courses/{course}/enroll', [StudentController::class, 'enroll'])
     ->middleware('auth')
     ->name('courses.enroll');
+
+
+

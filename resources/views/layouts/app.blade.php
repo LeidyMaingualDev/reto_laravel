@@ -38,6 +38,30 @@
     </div>
     @endif
 
+    <nav>
+        <ul>
+            <li><a href="/">Inicio</a></li>
+            <li><a href="{{ route('courses.index') }}">Cursos</a></li>
+
+            @auth
+            @if(auth()->user()->role === 'profesor')
+            <li><a href="{{ route('admin.dashboard') }}">Panel administrativo</a></li>
+            @endif
+
+            <li>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit">Cerrar sesión</button>
+                </form>
+            </li>
+            @endauth
+
+            @guest
+            <li><a href="{{ route('login') }}">Iniciar sesión</a></li>
+            @endguest
+        </ul>
+    </nav>
+
 </body>
 
 </html>
