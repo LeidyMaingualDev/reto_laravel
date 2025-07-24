@@ -8,14 +8,16 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 
+
 // Página de inicio
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Autenticación - Login
+// Mostrar formulario de login
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
+// Procesar login
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
 // Autenticación - Registro
@@ -48,3 +50,7 @@ Route::middleware(['auth'])->group(function () {
     // Dashboard administrador (si lo usas)
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
+//inscrpcion 
+Route::post('/courses/{course}/enroll', [StudentController::class, 'enroll'])
+    ->middleware('auth')
+    ->name('courses.enroll');

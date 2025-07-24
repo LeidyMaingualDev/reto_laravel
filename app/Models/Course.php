@@ -17,4 +17,10 @@ class Course extends Model
         'instructor',
         'image',
     ];
+
+//ver estudiantes inscritos
+    public function students()
+    {
+        return $this->belongsToMany(User::class, 'course_user');
+    }
 }

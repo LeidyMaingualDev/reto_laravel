@@ -24,15 +24,6 @@ class User extends Authenticatable
         'role',
     ];
 
-    public function isStudent()
-    {
-        return $this->role === 'student';
-    }
-
-    public function isTeacher()
-    {
-        return $this->role === 'teacher';
-    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -55,5 +46,20 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function isTeacher()
+    {
+        return $this->role === 'teacher';
+    }
+
+    public function isStudent()
+    {
+        return $this->role === 'student';
+    }
+//cursos a los que esta inscrito
+    public function enrolledCourses()
+    {
+        return $this->belongsToMany(Course::class, 'course_user');
     }
 }
