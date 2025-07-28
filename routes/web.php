@@ -8,12 +8,21 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 
+//ir a index
+Route::get('/courses', function () {
+    $user = Auth::user();
 
+    if ($user && $user->role === 'student') {
+        return redirect()->route('student.dashboard');
+    }
 
-// Página de inicio
-Route::get('/', [HomeController::class, 'index'])->name('home');
+    return app(App\Http\Controllers\CourseController::class)->index();
+})->name('courses.index');
 
-// Mostrar formulario de login
+//inicio
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
+
+// formulario de login
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
@@ -37,7 +46,7 @@ Route::post('/logout', function () {
 // Rutas RESTful para cursos
 Route::resource('courses', CourseController::class);
 
-// Dashboards según el rol (protegidos por autenticación)
+// Dashboards según el rol
 Route::middleware(['auth'])->group(function () {
 
     // Dashboard estudiante
@@ -51,6 +60,8 @@ Route::middleware(['auth'])->group(function () {
 Route::post('/courses/{course}/enroll', [StudentController::class, 'enroll'])
     ->middleware('auth')
     ->name('courses.enroll');
+
+
 
 
 

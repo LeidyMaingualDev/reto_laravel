@@ -3,22 +3,31 @@
 @section('title', 'Panel Administrativo')
 
 @section('content')
-    <h1 class="mb-4">Panel Administrativo</h1>
+<div class="admin-dashboard">
+    <h1 class="dashboard-title">Panel Administrativo</h1>
 
-    <div class="mb-4">
-        <strong>Total de cursos:</strong> {{ $totalCursos }}
+    <div class="stats-cards">
+        <div class="card stat-card">
+            <h2>{{ $totalCursos }}</h2>
+            <p>Total de cursos</p>
+        </div>
+        <div class="card stat-card">
+            <h2>{{ $totalEstudiantes }}</h2>
+            <p>Total de estudiantes</p>
+        </div>
     </div>
 
-    <div class="mb-4">
-        <strong>Total de estudiantes:</strong> {{ $totalEstudiantes }}
-    </div>
-
-    <div>
-        <h3>Inscripciones por curso</h3>
-        <ul>
+    <div class="course-stats">
+        <h3 class="section-title">Inscripciones por curso</h3>
+        <ul class="course-list">
             @foreach ($inscripcionesPorCurso as $curso)
-                <li>{{ $curso->title }} - {{ $curso->students_count }} inscripciones</li>
+                <li>
+                    <span class="course-title">{{ $curso->title }}</span>
+                    <span class="badge">{{ $curso->students_count }} inscritos</span>
+                </li>
             @endforeach
         </ul>
     </div>
+</div>
 @endsection
+

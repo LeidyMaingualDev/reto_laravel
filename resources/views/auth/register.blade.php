@@ -2,17 +2,22 @@
 
 @section('title', 'Registro')
 
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/login.css') }}">
+@endsection
+
 @section('content')
-<div class="container mt-5">
-    <h2 class="mb-4">Registro de usuario</h2>
+<div class="form-session">
+    <h1>Registro de Usuario</h1>
 
     @if(session('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
-@endif
-
+        <div class="alert-danger">
+            {{ session('success') }}
+        </div>
+    @endif
 
     @if ($errors->any())
-        <div class="alert alert-danger">
+        <div class="alert-danger">
             <ul class="mb-0">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -24,41 +29,81 @@
     <form action="{{ route('register') }}" method="POST">
         @csrf
 
-        <div class="mb-3">
-            <label for="name" class="form-label">Nombre</label>
-            <input type="text" name="name" class="form-control" required value="{{ old('name') }}">
-        </div>
+        <label for="name">Nombre</label>
+        <input 
+            type="text" 
+            name="name" 
+            id="name"
+            class="controls" 
+            required 
+            value="{{ old('name') }}"
+        >
+        @error('name')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
 
-        <div class="mb-3">
-            <label for="email" class="form-label">Correo</label>
-            <input type="email" name="email" class="form-control" required value="{{ old('email') }}">
-        </div>
+        <label for="email">Correo electrónico</label>
+        <input 
+            type="email" 
+            name="email" 
+            id="email"
+            class="controls" 
+            required 
+            value="{{ old('email') }}"
+        >
+        @error('email')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
 
-        <div class="mb-3">
-            <label for="password" class="form-label">Contraseña</label>
-            <input type="password" name="password" class="form-control" required>
-        </div>
+        <label for="password">Contraseña</label>
+        <input 
+            type="password" 
+            name="password" 
+            id="password"
+            class="controls" 
+            required
+        >
+        @error('password')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
 
-        <div class="mb-3">
-            <label for="password_confirmation" class="form-label">Confirmar contraseña</label>
-            <input type="password" name="password_confirmation" class="form-control" required>
-        </div>
+        <label for="password_confirmation">Confirmar contraseña</label>
+        <input 
+            type="password" 
+            name="password_confirmation" 
+            id="password_confirmation"
+            class="controls" 
+            required
+        >
 
-        <div class="mb-3">
-            <label for="role" class="form-label">Rol</label>
-            <select name="role" class="form-select" required>
-                <option value="">Selecciona tu rol</option>
-                <option value="student">Estudiante</option>
-                <option value="teacher">Docente</option>
-            </select>
-        </div>
+        <label for="role">Rol</label>
+        <select 
+            name="role" 
+            id="role" 
+            class="controls" 
+            required
+        >
+            <option value="">Selecciona tu rol</option>
+            <option value="student" {{ old('role') == 'student' ? 'selected' : '' }}>Estudiante</option>
+            <option value="teacher" {{ old('role') == 'teacher' ? 'selected' : '' }}>Docente</option>
+        </select>
+        @error('role')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
 
-        <div class="mb-3">
-            <label for="secret_code" class="form-label">Código secreto</label>
-            <input type="text" name="secret_code" class="form-control" required>
-        </div>
+        <label for="secret_code">Código secreto</label>
+        <input 
+            type="text" 
+            name="secret_code" 
+            id="secret_code"
+            class="controls" 
+            required
+        >
+        @error('secret_code')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
 
-        <button type="submit" class="btn btn-primary">Registrarse</button>
+        <button type="submit" class="controls">Registrarse</button>
     </form>
 </div>
 @endsection

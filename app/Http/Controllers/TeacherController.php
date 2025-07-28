@@ -13,10 +13,10 @@ class TeacherController extends Controller
         // Total de cursos
         $totalCursos = Course::count();
 
-        // Total de estudiantes (usuarios con rol estudiante)
+        // Total de estudiantes
         $totalEstudiantes = User::where('role', 'student')->count();
 
-        // Inscripciones por curso (suponiendo tabla course_user para inscripciones)
+        // Inscripciones por curso
         $inscripcionesPorCurso = Course::withCount('students')->get();
 
         return view('teacher.dashboard', compact('totalCursos', 'totalEstudiantes', 'inscripcionesPorCurso'));

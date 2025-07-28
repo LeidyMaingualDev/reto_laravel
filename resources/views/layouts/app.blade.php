@@ -4,20 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <title>@yield('title', 'Gestión de Cursos')</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
-        <div class="container">
-            <a class="navbar-brand" href="{{ route('courses.index') }}">Gestión de Cursos</a>
-        </div>
-    </nav>
+    <header>
+            <div class="logo">
+                <img src="{{ asset('images/EvoZone.png') }}" alt="EvoZone Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{{ route('home.index') }}">Inicio</a></li>
+                    <li><a href="{{ route('courses.index') }}">Cursos</a></li>
+                    @guest
+                    <li><a href="{{ route('login') }}">Iniciar Sesión</a></li>
+                    <li><a href="{{ route('register.form') }}">Registrarse</a></li>
+                    @endguest
 
-    <div class="container">
+                    @auth
+                <li><a href="{{ route('logout') }}"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Cerrar Sesión
+                </a></li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @endauth
+                </ul>
+            </nav>
+    </header>
+
+
+    <div class="container mt-4">
         @yield('content')
     </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -38,30 +59,17 @@
     </div>
     @endif
 
-    <nav>
-        <ul>
-            <li><a href="/">Inicio</a></li>
-            <li><a href="{{ route('courses.index') }}">Cursos</a></li>
-
-            @auth
-            @if(auth()->user()->role === 'profesor')
-            <li><a href="{{ route('admin.dashboard') }}">Panel administrativo</a></li>
-            @endif
-
-            <li>
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit">Cerrar sesión</button>
-                </form>
-            </li>
-            @endauth
-
-            @guest
-            <li><a href="{{ route('login') }}">Iniciar sesión</a></li>
-            @endguest
-        </ul>
-    </nav>
+    
 
 </body>
+<footer class="site-footer">
+    <div class="footer-content">
+        <p>&copy; {{ date('Y') }} EvoZone. Todos los derechos reservados.</p>
+        <p>Contacto: info@evozone.com | Síguenos en redes sociales</p>
+    </div>
+</footer>
 
 </html>
+
+
+

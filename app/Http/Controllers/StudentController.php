@@ -27,7 +27,7 @@ class StudentController extends Controller
 
     $course = \App\Models\Course::findOrFail($courseId);
 
-    // Evita duplicados
+    //duplicados
     if ($user->enrolledCourses()->where('course_id', $courseId)->exists()) {
         return redirect()->back()->with('info', 'Ya estás inscrito en este curso.');
     }
@@ -36,6 +36,15 @@ class StudentController extends Controller
 
     return redirect()->back()->with('success', '¡Te has inscrito exitosamente!');
 }
+
+public function dashboard()
+{
+    $user = Auth::user();
+    $courses = $user->courses; 
+return view('student.dashboard', compact('courses'));
+
+}
+
 
 }
 

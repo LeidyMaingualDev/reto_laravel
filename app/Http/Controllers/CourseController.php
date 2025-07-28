@@ -3,24 +3,48 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
+use App\Http\Controllers\Controller;
+
 
 class CourseController extends Controller
 {
-    // Mostrar todos los cursos
-    public function index()
+
+    public function __construct()
     {
-        $courses = Course::all();
-        return view('courses.index', compact('courses'));
+        $this->middleware('auth')->only('enroll');
+    }
+    // Mostrar todos los cursos
+   public function index()
+{
+    $courses = Course::all();
+
+    if (Auth::check()) {
+        $user = Auth::user();
+
+        if ($user->isTeacher()) {
+            return view('courses.index', compact('courses'));
+        }
+
+        if ($user->isStudent()) {
+            return view('student.dashboard', compact('courses'));
+        }
     }
 
-    // Mostrar formulario para crear un nuevo curso
+    
+    return view('courses.public', compact('courses'));
+}
+
+
+
+    
     public function create()
     {
         return view('courses.create');
     }
 
-    // Guardar nuevo curso
+    
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -32,7 +56,7 @@ class CourseController extends Controller
             'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        // Subir imagen y guardar ruta
+        
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('images', 'public');
         }
@@ -42,21 +66,21 @@ class CourseController extends Controller
         return redirect()->route('courses.index')->with('success', 'Curso creado correctamente.');
     }
 
-    // Mostrar un curso específico
+   
     public function show($id)
     {
         $course = Course::findOrFail($id);
         return view('courses.show', compact('course'));
     }
 
-    // Mostrar formulario para editar un curso
+    
     public function edit($id)
     {
         $course = Course::findOrFail($id);
         return view('courses.edit', compact('course'));
     }
 
-    // Actualizar curso
+    
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
@@ -70,7 +94,7 @@ class CourseController extends Controller
 
         $course = Course::findOrFail($id);
 
-        // Si se sube nueva imagen, reemplazar
+        
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('images', 'public');
         }
@@ -80,7 +104,7 @@ class CourseController extends Controller
         return redirect()->route('courses.index')->with('success', 'Curso actualizado correctamente.');
     }
 
-    // Eliminar curso
+
     public function destroy($id)
     {
         $course = Course::findOrFail($id);
@@ -88,6 +112,27 @@ class CourseController extends Controller
 
         return redirect()->route('courses.index')->with('success', 'Curso eliminado correctamente.');
     }
+
+    public function enroll($courseId)
+{
+    $user = Auth::user();
+
+    
+    if ($user->role !== 'estudiante') {
+        return redirect()->back()->with('error', 'Solo los estudiantes pueden inscribirse.');
+    }
+
+    
+    if ($user->courses()->where('course_id', $courseId)->exists()) {
+        return redirect()->back()->with('info', 'Ya estás inscrito en este curso.');
+    }
+
+   
+    $user->courses()->attach($courseId);
+
+    return redirect()->back()->with('success', 'Inscripción exitosa.');
+}
+
 }
 
 

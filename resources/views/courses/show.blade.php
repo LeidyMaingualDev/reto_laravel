@@ -26,8 +26,33 @@
             <p><strong>Imagen:</strong> No disponible</p>
         @endif
 
-        <a href="{{ route('courses.index') }}" class="btn btn-secondary mt-3">Volver</a>
+        {{-- Formulario para inscribirse (solo si está autenticado y es estudiante) --}}
+        @auth
+            @if(auth()->user()->role === 'estudiante')
+                <form action="{{ route('courses.enroll', $course->id) }}" method="POST" class="mt-3">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">Inscribirme</button>
+                </form>
+            @endif
+        @endauth
+
+        {{-- Mensajes de sesión --}}
+        @if(session('success'))
+            <div class="alert alert-success mt-3">{{ session('success') }}</div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger mt-3">{{ session('error') }}</div>
+        @endif
+
+        @if(session('info'))
+            <div class="alert alert-info mt-3">{{ session('info') }}</div>
+        @endif
+
+        <div class="volver-container mt-4">
+            <a href="{{ route('courses.index') }}" class="btn-volver">Volver al listado</a>
+        </div>
+
     </div>
 </div>
 @endsection
-

@@ -1,0 +1,518 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+/* ESTILOS HEADER*/
+header {
+    background-color: #546383;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 90px;
+    border-bottom: 4px solid #aad3e954;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.logo img {
+    height: 120px;
+    width: auto;
+    object-fit: contain;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 40px;
+}
+
+nav a {
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #52a2d8;
+}
+
+nav a.active {
+    background-color: #138dcf;
+    color: white;
+}
+/*FOOTER*/
+.site-footer {
+    background-color: #24282b;
+    color: #ffffff;
+    padding: 30px 20px;
+    text-align: center;
+    font-size: 14px;
+    border-top: 4px solid #138dcf;
+}
+
+.site-footer .footer-content p {
+    margin: 5px 0;
+}
+
+/*HOME */
+.home {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #f0f4f8;
+    color: #1f1f1f;
+}
+
+.home h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.home p {
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.info-section {
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    color: #695959;
+}
+
+.info-section h2 {
+    font-size: 28px;
+    color: #010a0f;
+    margin-bottom: 15px;
+}
+
+.info-section p,
+.info-section ul {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.info-section ul {
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+
+/* Título de cursos */
+.courses-title {
+    text-align: center;
+    font-size: 28px;
+    margin: 40px 0 20px;
+    color: #333;
+}
+
+/* Grid de cursos */
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    padding: 0 20px 40px;
+}
+
+/* Tarjeta de curso */
+.course-card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-4px);
+}
+
+/* Botón inscribirse */
+.btn-inscribirse {
+    display: inline-block;
+    padding: 10px 16px;
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-inscribirse:hover {
+    background-color: #218838;
+}
+
+/* Texto cuando ya está logueado */
+.text-muted {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+/*LOGIN*/
+.form-session {
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.form-session h1 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #444;
+}
+
+.controls {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button.controls {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+button.controls:hover {
+    background-color: #0056b3;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #842029;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.text-danger {
+    color: #dc3545;
+    font-size: 14px;
+}
+/*VISUALIZACION CURSOS*/
+.container-cursos {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+/* Título */
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #138dcf;
+}
+
+/* Botón de crear curso */
+a.btn-primary {
+    background-color: #138dcf;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+a.btn-primary:hover {
+    background-color: #0f7bb4;
+}
+
+/* Estilo de la lista */
+.list-group {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Cada curso */
+.list-group-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: box-shadow 0.3s ease;
+}
+
+.list-group-item:hover {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Botones de acción */
+.list-group-item .btn {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    color: white;
+    margin-left: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+}
+.btn-info:hover {
+    background-color: #138496;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: black;
+}
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+.btn-danger:hover {
+    background-color: #c82333;
+}
+/*sow blade*/
+.card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 900px;
+    margin: 30px auto;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.card-header h2 {
+    font-size: 26px;
+    color: #138dcf;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.card-body p {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.card-body strong {
+    color: #000;
+}
+
+.card-body img {
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+    border: none;
+    font-size: 14px;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+.volver-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.btn-volver {
+    background-color: #17a2b8; /* Gris oscuro */
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.btn-volver:hover {
+    background-color: #212529; /* Más oscuro al pasar el mouse */
+    transform: scale(1.05);
+}
+/*DASHBOARD TEACHER*/
+.admin-dashboard {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.dashboard-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.stats-cards {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background-color: #007bff;
+    color: white;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    width: 45%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.course-stats {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #444;
+}
+
+.course-list {
+    list-style: none;
+    padding: 0;
+}
+
+.course-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.course-title {
+    font-weight: 500;
+}
+
+.badge {
+    background-color: #17a2b8;
+    color: white;
+    border-radius: 12px;
+    padding: 5px 15px;
+}
+/*dashboard student*/
+/* Contenedor principal */
+.container {
+    padding: 20px;
+}
+
+/* Título principal */
+h1 {
+    font-size: 2rem;
+    color: #1d3557;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Tarjeta de curso */
+.card {
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    height: 100%;
+    background-color: #f8f9fa;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Contenido del curso */
+.card-title {
+    font-size: 1.25rem;
+    color: #343a40;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.card-text {
+    color: #6c757d;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+/* Detalles del instructor y fecha */
+.card p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+/* Botón de inscripción */
+.btn-primary {
+    background-color: #17a2b8;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .col-md-4 {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+

@@ -2,21 +2,51 @@
 
 @section('title', 'Iniciar sesión')
 
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/login.css') }}">
+@endsection
+
 @section('content')
-    <h1 class="mb-4">Iniciar sesión</h1>
+
+<div class="form-session">
+    <h1>Iniciar sesión</h1>
+
+    @if(session('error'))
+        <div class="alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
 
     <form action="{{ route('login.submit') }}" method="POST">
         @csrf
-        <div>
-            <label for="email">Correo:</label>
-            <input type="email" name="email" required>
-        </div>
 
-        <div>
-            <label for="password">Contraseña:</label>
-            <input type="password" name="password" required>
-        </div>
+        <label for="email">Correo electrónico</label>
+        <input 
+            type="email" 
+            name="email" 
+            id="email"
+            class="controls" 
+            value="{{ old('email') }}" 
+            required
+        >
+        @error('email')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
 
-        <button type="submit">Entrar</button>
+        <label for="password">Contraseña</label>
+        <input 
+            type="password" 
+            name="password" 
+            id="password"
+            class="controls" 
+            required
+        >
+        @error('password')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
+
+        <button type="submit" class="controls">Ingresar</button>
     </form>
+</div>
 @endsection
+
